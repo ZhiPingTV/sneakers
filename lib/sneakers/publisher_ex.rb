@@ -2,11 +2,6 @@ module Sneakers
   class PublisherEx
     attr_accessor :exchange
 
-    def self.publish(msg, routing, opts={})
-        @publisher_ex ||= self.new(opts)
-        @publisher_ex.publish(msg, routing)
-    end
-
     def initialize(opts={})
         @mutex = Mutex.new
         @opts = Sneakers::Config.merge(opts)

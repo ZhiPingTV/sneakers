@@ -53,6 +53,7 @@ module Sneakers
     setup_general_logger!
     setup_worker_concerns!
     setup_general_publisher!
+    setup_general_publisher_ex!
     @configured = true
   end
 
@@ -61,6 +62,7 @@ module Sneakers
     Config.merge!(DEFAULTS.dup)
     @logger = nil
     @publisher = nil
+    @publisher_ex = nil
     @configured = false
   end
 
@@ -77,6 +79,10 @@ module Sneakers
 
   def self.publish(msg, routing)
     @publisher.publish(msg, routing)
+  end
+
+  def self.publish_ex(msg, routing)
+    @publisher_ex.publish(msg, routing)
   end
 
   def self.configured?
@@ -103,6 +109,10 @@ private
 
   def self.setup_general_publisher!
     @publisher = Sneakers::Publisher.new
+  end
+
+  def self.setup_general_publisher_ex!
+    @publisher_ex = Sneakers::PublisherEx.new
   end
 end
 

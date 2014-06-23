@@ -122,11 +122,20 @@ module Sneakers
         publisher.publish(msg, :to_queue => @queue_name)
       end
 
+      def enqueue_ex(msg)
+        publisher_ex.publish(msg, :to_queue => @queue_name)
+      end
+
       private
 
       def publisher
         @publisher ||= Sneakers::Publisher.new
       end
+
+      def publisher_ex
+        @publisher_ex ||= Sneakers::PublisherEx.new
+      end
+
     end
   end
 end
